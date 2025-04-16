@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Isso vai disparar o workflow para qualquer tag no formato vX.Y.Z
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
